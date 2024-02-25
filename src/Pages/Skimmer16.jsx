@@ -12,6 +12,7 @@ import {
 export default function Skimmer16() {
   return (
     <ModelContainer
+      variant="skimmer16"
       options={options}
       modelParts={modelParts}
       colorOptions={colorOptions}

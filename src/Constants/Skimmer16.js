@@ -4,7 +4,9 @@ export const initialColors = {
   "Power Poles": "",
   "Poling Platform": "",
 };
-
+export const images16 = {
+  "images":["16.png"]
+}
 export const colorOptions = {
   "Hull Color": [
     {

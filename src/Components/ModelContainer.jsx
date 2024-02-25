@@ -15,10 +15,11 @@ import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import useColorStore from "../Utils/store";
 import "../App.css";
-
 import Menu from "./Menu/Menu";
 import Loader from "./Loader";
 import useMenuStore from "../Utils/menuStore";
+import DownloadLink from "./DownloadLink";
+import useSelectedModel from "../Utils/selectedModel";
 
 //extend
 extend({ Water });
@@ -68,19 +69,36 @@ export default function ModelContainer({
   options,
   initialColors,
   initialOptions,
+  variant
 }) {
   const [scene, setScene] = useState(true);
   const [showMenu, setShowMenu] = useState(false);
   const [modelLoaded, setModelLoaded] = useState(false);
   const [previewMode, setPreviewMode] = useState(false);
   const [showColorContainer, setShowColorContainer] = useState(false);
-
   const { setActiveState, setInitialColors } = useColorStore();
   const updateSelection = useMenuStore((state) => state.updateSelection);
   const canvasRef = useRef();
-
+  const {model}= useSelectedModel();
+  console.log("selected model is",model)
   useEffect(() => {
-    setInitialColors(initialColors);
+    window.onbeforeunload = function() {
+        return true;
+    };
+
+    return () => {
+        window.onbeforeunload = null;
+    };
+}, []);
+  useEffect(() => {
+    
+   
+    
+    setInitialColors({
+      "Hull Color": "#d4b22e",
+      "Power Poles": "#000000",
+      "Poling Platform": "#000000",
+    });
     updateSelection(initialOptions);
   }, []);
   const toggleMenu = () => {
@@ -160,9 +178,7 @@ export default function ModelContainer({
           </div>
           {/*download pdf button*/}
           <div className='download-pdf'>
-            <button onClick={captureScreenshot} className='button-pdf'>
-              Download PDF
-            </button>
+          <DownloadLink selectedModel={model} />
           </div>
           <div className='menu-icon-wrapper'>
             {/*menu button*/}

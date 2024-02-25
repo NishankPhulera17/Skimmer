@@ -2,9 +2,35 @@ import React from "react";
 import backgroundImage from "/Pexels.png"; // Import your image here
 import "./index.css"; // Import your CSS file here if needed
 import { Link } from "react-router-dom";
-
-
+import useSelectedModel from "../../Utils/selectedModel";
+import useImageStore from '../../Utils/useImageStore'
+import { useNavigate } from "react-router-dom";
+import { images } from "../../Constants/Skimmer14";
+import { images16 } from "../../Constants/Skimmer16";
 export default function ModelSelector() {
+  const {setModel} = useSelectedModel(); // Updating model in the store
+  const { selectedImage, setSelectedImage } = useImageStore();
+
+  const navigate = useNavigate();
+  const updateModel = (newModelValue) => {
+    console.log("Model",newModelValue)
+    setModel(newModelValue)
+  };
+  const handleClick = () => {
+
+    updateModel('Skimmer 14');
+    setSelectedImage(images.images[0])
+    navigate("/Skimmer14");
+
+  };
+  const handleClick16 = () => {
+    updateModel('Skimmer 16');
+    setSelectedImage(images16.images[0])
+
+    navigate("/Skimmer16");
+
+  };
+
   return (
     
     <>
@@ -25,7 +51,9 @@ export default function ModelSelector() {
           <div
             className="boat-container"
             onClick={() => {
-              window.location.href = "/Skimmer14";
+              handleClick()
+              console.log("SKIMMER14")
+
             }}
           >
             <div className="boat-heading">
@@ -40,7 +68,10 @@ export default function ModelSelector() {
           <div
             className="boat-container"
             onClick={() => {
-              window.location.href = "/Skimmer16";
+              
+              handleClick16()
+
+              console.log("SKIMMER16")
             }}
           >
             <div className="boat-heading-1">
@@ -73,7 +104,8 @@ export default function ModelSelector() {
           <div
             className="boat-container"
             onClick={() => {
-              window.location.href = "/Skimmer14";
+             
+
             }}
           >
             <div className="boat-heading">
@@ -92,7 +124,7 @@ export default function ModelSelector() {
           <div
             className="boat-container"
             onClick={() => {
-              window.location.href = "/Skimmer16";
+              
             }}
           >
             <div className="boat-heading">

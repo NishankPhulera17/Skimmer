@@ -157,20 +157,21 @@ const Menu = ({ options }) => {
     ];
 
     if (requiredUserFields.every((field) => userForm[field])) {
-      try {
-        await emailjs.send(
-          "service_lix0k54",
-          "template_mdo5amt",
-          templateParams,
-          "MX384zq_9Yg81JBDP"
-        );
+      console.log('selected options ',selectedOptions)
+      // try {
+      //   await emailjs.send(
+      //     "service_lix0k54",
+      //     "template_mdo5amt",
+      //     templateParams,
+      //     "MX384zq_9Yg81JBDP"
+      //   );
 
-        alert("Form submitted successfully");
-        setUserForm(defaultUser);
-      } catch (error) {
-        console.error("Error submitting form:", error);
-        alert("Error submitting form. Please try again.");
-      }
+      //   alert("Form submitted successfully");
+      //   setUserForm(defaultUser);
+      // } catch (error) {
+      //   console.error("Error submitting form:", error);
+      //   alert("Error submitting form. Please try again.");
+      // }
     } else {
       const missingFields = requiredUserFields.filter(
         (field) => !userForm[field]
